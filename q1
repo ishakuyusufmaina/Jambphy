@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efficiency of Machine Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .options {
+            margin-top: 10px;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        #feedback, #solution {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        button {
+            margin-top: 10px;
+            padding: 8px 16px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="question">
+        <p>A machine of velocity ratio 6 requires an effort of 400N to raise a load of 800N through 1m. Find the efficiency of the machine.</p>
+    </div>
+
+    <div class="options">
+        <label><input type="radio" name="answer" value="A"> A. 50%</label>
+        <label><input type="radio" name="answer" value="B"> B. 22.2%</label>
+        <label><input type="radio" name="answer" value="C"> C. 33.3%</label>
+        <label><input type="radio" name="answer" value="D"> D. 55.6%</label>
+    </div>
+
+    <button onclick="submitAnswer()">Submit</button>
+    <button onclick="showSolution()">Solve</button>
+
+    <div id="feedback"></div>
+    <div id="solution"></div>
+
+    <script>
+        function submitAnswer() {
+            // Get selected answer
+            const answers = document.getElementsByName('answer');
+            let selectedAnswer;
+            for (const answer of answers) {
+                if (answer.checked) {
+                    selectedAnswer = answer.value;
+                    break;
+                }
+            }
+
+            // Feedback logic
+            const feedback = document.getElementById('feedback');
+            if (!selectedAnswer) {
+                feedback.textContent = "Please select an option!";
+                feedback.style.color = "red";
+            } else if (selectedAnswer === 'C') {
+                feedback.textContent = "Correct!";
+                feedback.style.color = "green";
+            } else {
+                feedback.textContent = "Wrong! Try again.";
+                feedback.style.color = "red";
+            }
+        }
+
+        function showSolution() {
+            const solution = document.getElementById('solution');
+            solution.textContent = "Solution:\nEfficiency = (Mechanical Advantage / Velocity Ratio) * 100\nMechanical Advantage = Load / Effort = 800N / 400N = 2\nEfficiency = (2 / 6) * 100 = 33.3%";
+            solution.style.color = "blue";
+            solution.style.whiteSpace = "pre"; // To maintain line breaks
+        }
+    </script>
+
+</body>
+</html>
